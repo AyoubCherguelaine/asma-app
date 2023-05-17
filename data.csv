@@ -1,5 +1,2 @@
-Name,Age
-ayoub,22
-alger,22
-hey,25
-ayoub,25
+firstname,lastname,birthday,email,phone,country,city,homeaddress,postalcode,nationality,job,contactperson,phonenumberContact,emailContact
+Cherguelaine,Ayoub,2000-08-12,cherguelainea@gmail.com,0554372377,Algeria,blida,"beni tamou,zaouia,rue kbayli 21",09054,algeria,student,mohamed cherguelaine,0555686028,ayoubchergue09@gmail.com

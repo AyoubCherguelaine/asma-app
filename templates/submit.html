@@ -14,32 +14,159 @@
         <div class="mt-4"></div>
     <h1>New:</h1>
     <div class="mt-4"></div>
-        <form action="/submit" method="POST">
-            <div class="form-group">
-                <label for="Firstname">Firstname:</label>
-                <input type="text" class="form-control" id="Firstname" name="Firstname" required>
-            </div>
-
-            <div class="form-group">
-                <label for="Lastname">Lastname:</label>
-                <input type="number" class="form-control" id="Lastname" name="Lastname" required>
-            </div>
-
-            <div class="form-group">
-                <label for="age">Age:</label>
-                <input type="number" class="form-control" id="age" name="age" required>
-            </div>
-
-            <!-- Add more fields as required -->
-            
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        
+<form action="/submit" method="POST" onsubmit="return validateForm();">
+    <div class="form-row">
+        <div class="col">
+            <label for="firstname">First Name:</label>
+            <input type="text" class="form-control" id="firstname" name="firstname" required>
+        </div>
+        <div class="col">
+            <label for="lastname">Last Name:</label>
+            <input type="text" class="form-control" id="lastname" name="lastname" required>
+        </div>
     </div>
+
+
+
+    <div class="form-row">
+        <div class="col">
+            <label for="birthday">Birthday:</label>
+            <input type="date" class="form-control" id="birthday" name="birthday" required>
+        </div>
+    </div>
+
+
+    <div class="form-row">
+        <div class="col">
+            <label for="email">email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="phone">phone number:</label>
+            <input type="text" class="form-control" id="phone" name="phone" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="country">Country:</label>
+            <input type="text" class="form-control" id="country" name="country" required>
+        </div>
+        <div class="col">
+            <label for="city">City:</label>
+            <input type="text" class="form-control" id="city" name="city" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="homeaddress">Home Address:</label>
+            <input type="text" class="form-control" id="homeaddress" name="homeaddress" required>
+        </div>
+        <div class="col">
+            <label for="postalcode">Postal Code:</label>
+            <input type="text" class="form-control" id="postalcode" name="postalcode" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="nationality">Nationality:</label>
+            <input type="text" class="form-control" id="nationality" name="nationality" required>
+        </div>
+        <div class="col">
+            <label for="job">Job:</label>
+            <input type="text" class="form-control" id="job" name="job" required>
+        </div>
+    </div>
+
+    <div class="mt-4"></div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="contactperson">Person to Contact:</label>
+                        <input type="text" class="form-control" id="contactperson" name="contactperson" required>
+                    </div>
+                    <div class="col">
+                        <label for="phonenumberContact">Phone Number:</label>
+                        <input type="tel" class="form-control" id="phonenumberContact" name="phonenumberContact" required>
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="col">
+                        <label for="emailContact">Email:</label>
+                        <input type="email" class="form-control" id="emailContact" name="emailContact" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-4">Submit</button>
+</form>
+    </div>
+
+
+
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
       
 
+        <script>
+            function validateForm() {
+                // Get form field values
+                var firstname = document.getElementById("firstname").value;
+                var lastname = document.getElementById("lastname").value;
+                var birthday = document.getElementById("birthday").value;
+                var email = document.getElementById("email").value;
+                var phone = document.getElementById("phone").value;
+                var country = document.getElementById("country").value;
+                var city = document.getElementById("city").value;
+                var homeaddress = document.getElementById("homeaddress").value;
+                var postalcode = document.getElementById("postalcode").value;
+                var nationality = document.getElementById("nationality").value;
+                var job = document.getElementById("job").value;
+                var contactperson = document.getElementById("contactperson").value;
+                var phonenumberContact = document.getElementById("phonenumberContact").value;
+                var emailContact = document.getElementById("emailContact").value;
+        
+                // Regular expressions for validation
+        var nameRegex = /^[a-zA-Z]+$/;
+        var phoneRegex = /^\d{10}$/;
+
+        // Perform validation checks
+        if (!nameRegex.test(firstname) || !nameRegex.test(lastname)) {
+            alert("Please enter a valid first name and last name.");
+            return false; // Prevent form submission
+        }
+
+        if (!phoneRegex.test(phone) || !phoneRegex.test(phonenumberContact)) {
+            alert("Please enter a valid phone number.");
+            return false; // Prevent form submission
+        }
+        
+                // Perform validation checks
+                if (firstname === "" || lastname === "" || birthday === "" || email === "" || phone === "" ||
+                    country === "" || city === "" || homeaddress === "" || postalcode === "" || nationality === "" ||
+                    job === "" || contactperson === "" || phonenumberContact === "" || emailContact === "") {
+                    alert("Please fill in all the required fields.");
+                    return false; // Prevent form submission
+                }
+        
+                // Perform additional validation checks if needed
+        
+                // If all checks pass, allow form submission
+                return true;
+            }
+        </script>
 </body>
 </html>

@@ -27,22 +27,23 @@
         <table id="peopleTable" class="table">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Age</th>
-                    <!-- Add more table headers as required -->
+                    <th>Phone</th>
                 </tr>
             </thead>
             <tbody>
                 {% for person in people %}
                     <tr>
-                        <td>{{ person.Name }}</td>
-                        <td>{{ person.Age }}</td>
-                        <!-- Display additional fields as required -->
+                        <td>{{ person.firstname }}</td>
+                        <td>{{ person.lastname }}</td>
+                        <td>{{ person.age }}</td>
+                        <td>{{ person.phone }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -66,6 +67,20 @@
                 }
             }
         }
+
+        function calculateAge(birthdate) {
+    var today = new Date();
+    var birthDate = new Date(birthdate);
+
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    return age;
+}
     </script>
 </body>
 </html>
