@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     p = get_people_data()
-    print(p)
+    
     return render_template('index.html', people=p)
 
 
@@ -47,6 +47,43 @@ def submit():
     return redirect(url_for('home'))
 
 
+# Function to load patient data from data.csv
+def load_patient_data():
+    try:
+        df = pd.read_csv('data.csv')
+        # Format phone number
+        df['phone'] = df['phone'].apply(format_phone_number)
+        df['phonenumberContact'] = df['phonenumberContact'].apply(format_phone_number)
+        return df
+    except FileNotFoundError:
+        return pd.DataFrame()
+
+# Route to display patient data based on index
+@app.route('/<int:id>')
+def view_patient(id):
+    df = load_patient_data()
+    if not df.empty and 'id' in df.columns:
+        patient = df[df['id'] == id].to_dict(orient='records')
+        if patient:
+            return render_template('patient.html', patient=patient[0])
+    return 'Patient not found'
+
+#1,Cherguelaine,Ayoub,2000-08-12,cherguelainea@gmail.com,554372377,Algeria,blida,"beni tamou,zaouia,rue kbayli 21",9054,algeria,student,mohamed cherguelaine,555686028,ayoubchergue09@gmail.com
+
+# Endpoint for deleting a patient
+@app.route('/delete/<int:id>', methods=['GET', 'POST'])
+def delete_patient(id):
+    # Logic for deleting the patient with the given ID
+    try:
+        df = pd.read_csv('data.csv')
+        df = df.drop(df[df['id'] == id].index)
+        df.to_csv('data.csv', index=False)
+    except FileNotFoundError:
+        pass  # Handle the file not found error
+
+    # Redirect to the home page after deletion
+    return redirect('/')
+
 
 # Function to calculate age based on the birthdate
 def calculate_age(birthdate):
@@ -57,24 +94,49 @@ def calculate_age(birthdate):
         age -= 1
     return age
 
+
+def format_phone_number(phone_number):
+    # Remove any non-digit characters from the phone number
+    digits = ''.join(filter(str.isdigit, str(phone_number)))
+    # Add a leading zero to the phone number
+    formatted_number = '0' + digits
+
+    return formatted_number
+
+
 # Function to retrieve all people's data
 def get_people_data():
     # Load data from the file or database
     # For example, if you have previously saved the data in a CSV file
     df = pd.read_csv('data.csv')
 
+    # Format phone number
+    df['phone'] = df['phone'].apply(format_phone_number)
+
     # Calculate age for each person
     df['age'] = df['birthday'].apply(calculate_age)
     # Convert DataFrame to a list of dictionaries
     people = df.to_dict('records')
-
+    
     return people
 
 # Function to save a person's data
 # Function to save a person's data
 def save_person_data(firstname, lastname, birthday, email, phone, country, city, homeaddress, postalcode,
                      nationality, job, contactperson, phonenumberContact, emailContact):
+    # Generate ID for the new patient
+    try:
+        df = pd.read_csv('data.csv')
+        last_id = df['id'].max()
+        if pd.isna(last_id):
+            new_id = 1
+        else:
+            new_id = int(last_id) + 1
+    except FileNotFoundError:
+        new_id = 1
+
     data = pd.DataFrame({
+        'id': [new_id],
         'firstname': [firstname],
         'lastname': [lastname],
         'birthday': [birthday],

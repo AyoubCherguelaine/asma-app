@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Data</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .card {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/">/home/profile/{{ patient.id }}</a>
+        <h1 class="mt-5">Patient Details</h1>
+        <div class="mt-4"></div>
+        <form action="/delete/{{ patient.id }}" method="POST">
+            <div class="form-group">
+                <input type="submit" class="btn btn-danger" value="Delete">
+            </div>
+        </form>
+        <div class="mt-4"></div>
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Personal Information</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>First Name:</strong> {{ patient.firstname }}</p>
+                        <p><strong>Last Name:</strong> {{ patient.lastname }}</p>
+                        <p><strong>Birthday:</strong> {{ patient.birthday }}</p>
+                        <p><strong>Email:</strong> {{ patient.email }}</p>
+                        <p><strong>Phone Number:</strong> {{ patient.phone }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Country:</strong> {{ patient.country }}</p>
+                        <p><strong>City:</strong> {{ patient.city }}</p>
+                        <p><strong>Home Address:</strong> {{ patient.homeaddress }}</p>
+                        <p><strong>Postal Code:</strong> {{ patient.postalcode }}</p>
+                        <p><strong>Nationality:</strong> {{ patient.nationality }}</p>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Job:</strong> {{ patient.job }}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4"></div>
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Person to Contact</h3>
+                <div class="mt-4"></div>
+                <div class="row">
+                    
+                    <div class="col-md-6">
+                        <p><strong>Person:</strong> {{ patient.contactperson }}</p>
+                        <p><strong>Phone Number:</strong> {{ patient.phonenumberContact }}</p>
+                        <p><strong>Email:</strong> {{ patient.emailContact }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

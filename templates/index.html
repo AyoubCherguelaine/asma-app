@@ -31,6 +31,7 @@
                     <th>Last Name</th>
                     <th>Age</th>
                     <th>Phone</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +41,7 @@
                         <td>{{ person.lastname }}</td>
                         <td>{{ person.age }}</td>
                         <td>{{ person.phone }}</td>
+                        <td><a href="/{{ person.id }}" class="btn btn-success">profile</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
