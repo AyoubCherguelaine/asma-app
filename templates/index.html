@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>People Information</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/">/home</a>
+
+        <h1>People Information</h1>
+        
+        <div class="mt-4"></div>
+        <form>
+            <div class="form-row align-items-center">
+                <div class="col-auto">
+                    <input type="text" class="form-control" id="search" placeholder="Search by name" onkeyup="searchTable()">
+                </div>
+                <div class="col-auto">
+                    <a href="/submit" class="btn btn-primary">Insert New</a>
+                </div>
+            </div>
+        </form>
+
+        <div class="mt-4"></div>
+
+        <table id="peopleTable" class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <!-- Add more table headers as required -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for person in people %}
+                    <tr>
+                        <td>{{ person.Name }}</td>
+                        <td>{{ person.Age }}</td>
+                        <!-- Display additional fields as required -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        function searchTable() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let table = document.getElementById("peopleTable");
+            let rows = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) {
+                let name = rows[i].getElementsByTagName("td")[0];
+                let age = rows[i].getElementsByTagName("td")[1];
+                // Add more variables for additional fields
+
+                if (name.innerHTML.toLowerCase().indexOf(input) > -1 ||
+                    age.innerHTML.toLowerCase().indexOf(input) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
